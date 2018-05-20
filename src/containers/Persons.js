@@ -7,19 +7,10 @@ import * as actionTypes from '../store/actions';
 
 class Persons extends Component {
 
-    createNewPerson = () => {
-        const newPerson = {
-            id: Math.random(), // not really unique but good enough here!
-            name: 'Max',
-            age: Math.floor( Math.random() * 40 )
-        }
-        return newPerson;
-    }
-
     render () {
         return (
             <div>
-                <AddPerson personAdded={() => this.props.addPerson(this.createNewPerson())} />
+                <AddPerson personAdded={() => this.props.addPerson()} />
                 {this.props.persons.map(person => (
                     <Person 
                         key={person.id}
