@@ -6,7 +6,7 @@ import AddPerson from '../components/AddPerson/AddPerson';
 
 class Persons extends Component {
 
-    personAddedHandler = () => {
+    createNewPerson = () => {
         const newPerson = {
             id: Math.random(), // not really unique but good enough here!
             name: 'Max',
@@ -24,13 +24,13 @@ class Persons extends Component {
     render () {
         return (
             <div>
-                <AddPerson personAdded={() => this.props.addPerson(this.personAddedHandler())} />
+                <AddPerson personAdded={() => this.props.addPerson(this.createNewPerson())} />
                 {this.props.persons.map(person => (
                     <Person 
                         key={person.id}
                         name={person.name} 
                         age={person.age} 
-                        clicked={() => this.personDeletedHandler(person.id)}/>
+                        clicked={() => this.props.deletePerson(person.id)}/>
                 ))}
             </div>
         );
@@ -44,7 +44,8 @@ const mapStateToProps = state => {
 }
 const mapDispatchToProps = dispatch => {
     return {
-        addPerson: (person) => dispatch({ type: 'ADD_PERSON', newPerson: person })
+        addPerson: (person) => dispatch({ type: 'ADD_PERSON', newPerson: person }),
+        deletePerson: (id) => dispatch({ type: 'DELETE_PERSON', id: id })
     }
 }
 

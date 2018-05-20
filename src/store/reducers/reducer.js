@@ -8,6 +8,12 @@ const reducer = (state = initialState, action) => {
       return {
         persons: [...state.persons, action.newPerson]
       }
+    case 'DELETE_PERSON':
+      const copyPersons = [...state.persons];
+      const newPersons = copyPersons.filter((person) => person.id !== action.id)
+      return {
+        persons: newPersons
+      }
   }
   return state;
 }
